@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        li {
+            background-color: rgb(74, 143, 223);
+            width: 200px;
+            border-color: rgb(41, 0, 189);
+            border-width: 20px;
+            border-style: double;
+            
+        }
+        ul li {
+            color: red;
+        }
+    </style>
+    <title>Contenedores</title>
+</head>
+<body>  
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <div style="border: none;">
+        <button id="btn-clic">AGREGAR</button>
+    </div>
+
+    <ul id="menu">
+        <li>Contenedor 1<br><button class="delete">Eliminar</button></li>
+
+    </ul>
+    
+      <script>
+            
+      var cont = 1;
+
+      $(document).ready(function(){
+        $("#btn-clic").click(function(){
+            cont++;
+            $("#menu").append('<li> Contenedor '+cont+'<br><button class="up">Subir</button><button class="down">Bajar</button><button class="delete">Eliminar</button></li>');
+            });
+        });
+      
+
+        function moveUp(element) {
+            if(element.previousElementSibling)
+                element.parentNode.insertBefore(element, element.previousElementSibling);
+        }
+
+        function moveDown(element) {
+        
+            if(element.nextElementSibling)
+                element.parentNode.insertBefore(element.nextElementSibling, element);
+        }
+
+        function moveDelete(element) {
+        
+            element.remove();
+    }
+
+        document.querySelector('ul').addEventListener('click', function(e) {
+
+            if(e.target.className === 'down') 
+                moveDown(e.target.parentNode);
+            else if(e.target.className === 'up') 
+                moveUp(e.target.parentNode);
+            else if(e.target.className === 'delete') 
+                moveDelete(e.target.parentNode);
+        });
+
+</script>
+</body>
+</html>
